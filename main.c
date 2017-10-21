@@ -83,10 +83,14 @@ int main(void) {
 	// convert second number to int
 	int second_number = atoi(token);
         if (second_negative) second_number = second_number * -1;
-
-	// perform modulo
-	int result = first_number % second_number;
-	printf("%d %% %d = %d\n\n", first_number, second_number, result);
+        
+	// check for 0 divisor and perform modulo
+        if (second_number != 0) { 
+	  int result = first_number % second_number;
+	  printf("%d %% %d = %d\n\n", first_number, second_number, result);
+	} else {
+	  printf("Setting the divisor = 0 returns a floating point exception.\n\n");
+	}
 
         first_negative = 0;
         second_negative = 0;
