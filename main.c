@@ -11,6 +11,8 @@ int main(void) {
   char token[64];
   char ch = '0';
   int i = 0;
+  char first_negative = 0;
+  char second_negative = 0;
 
   printf("*--------------------------------------------------------------------------------------------------*\n");
   printf("| Please enter the modulo expression to be calculated in the form A %% B where A and B are integers |\n");
@@ -20,9 +22,15 @@ int main(void) {
   while(1) {
 
 	ch = getchar();
-	if (ch == 'Q') {
+	if (ch == 'Q' || ch == 'q') {
            printf("bye\n");
            return 0;
+        }
+
+        // check if first number is negative
+        if (ch == '-') {
+          first_negative = 1;
+          ch = getchar();
         }
 
 	// get first number
@@ -35,12 +43,19 @@ int main(void) {
 	token[i] = '\0';
 
 	// convert first number to int
-	int firstnumber = atoi(token);
+	int first_number = atoi(token);
+        if (first_negative) first_number = first_number * -1;
 
 	// throw away input until next number
-	while (!isdigit(ch)) {
+	while (!isdigit(ch) && ch != '-') {
 	   ch = getchar();
 	}
+
+        // check if second number is negative
+        if (ch == '-') {
+          second_negative = 1;
+          ch = getchar();
+        }
 
 	// get second number
 	i = 0;
@@ -52,10 +67,14 @@ int main(void) {
 	token[i] = '\0';
 
 	// convert second number to int
-	int secondnumber = atoi(token);
+	int second_number = atoi(token);
+        if (second_negative) second_number = second_number * -1;
 
 	// perform modulo
-	int result = firstnumber % secondnumber;
-	printf("%d %% %d = %d\n\n", firstnumber, secondnumber, result);
+	int result = first_number % second_number;
+	printf("%d %% %d = %d\n\n", first_number, second_number, result);
+
+        first_negative = 0;
+        second_negative = 0;
   }
 }
