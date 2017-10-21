@@ -6,9 +6,11 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+#define TOKEN_SIZE 10
+
 int main(void) {
 
-  char token[64];
+  char token[TOKEN_SIZE];
   char ch = '0';
   int i = 0;
   char first_negative = 0;
@@ -35,12 +37,18 @@ int main(void) {
 
 	// get first number
         i = 0;
-	while (isdigit(ch)) {
+	while (isdigit(ch) && i < TOKEN_SIZE - 1) {
 	   token[i] = ch;
 	   i++;
 	   ch = getchar();
 	}
 	token[i] = '\0';
+
+        // check for buffer max reached
+        if (i == TOKEN_SIZE - 1) {
+           printf("Your first number is too large\n");
+           return 1;
+        }
 
 	// convert first number to int
 	int first_number = atoi(token);
@@ -59,12 +67,18 @@ int main(void) {
 
 	// get second number
 	i = 0;
-	while (isdigit(ch)) {
+	while (isdigit(ch) && i < TOKEN_SIZE - 1) {
 	   token[i] = ch;
 	   i++;
 	   ch = getchar();
 	}
 	token[i] = '\0';
+ 
+        // check for buffer max reached
+        if (i == TOKEN_SIZE - 1) {
+           printf("Your second number is too large\n");
+           return 1;
+        }
 
 	// convert second number to int
 	int second_number = atoi(token);
