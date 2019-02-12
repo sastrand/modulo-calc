@@ -8,7 +8,10 @@ The [Euclidean definition](https://en.wikipedia.org/wiki/Euclidean_division) of 
 
 `a mod b = r, where a = b * q + r and (0 <= r < b)`
 
-So with this convention `7 % 3 = 2`
+So with this convention `-7 % 3 = 2`
+
+as `-7 = 3 * q + r`  
+which, given (0 <= r < b), must be `-7 = 3 * -3 + 2`.
 
 The [C99 Standard](https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html) defines the mod operation differently:
 
